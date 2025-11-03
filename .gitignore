@@ -1,0 +1,16 @@
+# OS / Editor
+.DS_Store
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+
+# Node/Vite
+node_modules/
+
+# Secrets
+.env
+.streamlit/.env
+.env

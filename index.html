@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>💪 헬스 분할·운동 추천 챗봇</title>
+    <style>
+      *{box-sizing:border-box} body{margin:0;background:linear-gradient(135deg,#7b5cff,#5ac8fa);
+        min-height:100vh;display:flex;justify-content:center;align-items:center;color:#111;
+        font-family:system-ui,Segoe UI,Apple SD Gothic Neo,Pretendard,sans-serif}
+      .app{width:960px;max-width:96vw;background:#fff;border-radius:22px;overflow:hidden;
+        box-shadow:0 10px 40px rgba(0,0,0,.12)}
+      header{background:linear-gradient(135deg,#7b5cff,#5ac8fa);color:#fff;padding:22px}
+      header h1{margin:0;font-size:22px} header p{margin:6px 0 0;opacity:.9}
+      .panel{padding:18px;border-bottom:1px solid #eef1f4}
+      .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+      .field{background:#fafafa;border:1px solid #eef1f4;border-radius:12px;padding:10px}
+      label{display:block;font-size:12px;color:#666;margin-bottom:6px}
+      select,input[type="number"],input[type="text"]{width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:10px;background:#fff}
+      .row{display:flex;gap:8px;align-items:center;margin-top:10px}
+      button{padding:10px 14px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;cursor:pointer}
+      .primary{background:#111;color:#fff;border-color:#111}
+      #chat{padding:16px;display:flex;flex-direction:column;gap:12px;max-height:55vh;overflow:auto}
+      .msg{background:#fff;border:1px solid #eef1f4;border-radius:14px;padding:14px}
+      .me{border-left:4px solid #8b5cf6}
+      .bot{border-left:4px solid #10b981}
+      table{width:100%;border-collapse:collapse;margin:8px 0} th,td{border:1px solid #eef1f4;padding:6px 8px;text-align:left}
+      th{background:#fafafa}
+      .free{padding:12px;border-top:1px solid #eef1f4;display:flex;gap:8px}
+      .free input{flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:10px}
+      .hint{font-size:12px;color:#666}
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <h1>💪 헬스 분할·운동 추천 챗봇</h1>
+        <p>목표/요일/장비/시간/부상만 골라서 “추천 받기” 👉 표·카드로 깔끔하게 안내합니다.</p>
+      </header>
+
+      <!-- 쉬운 입력 폼 -->
+      <div class="panel">
+        <div class="grid">
+          <div class="field"><label>목표</label>
+            <select id="goal"><option>근비대</option><option>감량</option><option>체력향상</option></select>
+          </div>
+          <div class="field"><label>주당 훈련일</label>
+            <select id="days"><option>3일</option><option selected>4일</option><option>5일</option><option>6일</option></select>
+          </div>
+          <div class="field"><label>경험</label>
+            <select id="level"><option>초급</option><option selected>초중급</option><option>중급</option><option>상급</option></select>
+          </div>
+          <div class="field" style="grid-column:span 2"><label>가용 장비</label>
+            <select id="equip">
+              <option selected>덤벨/머신/케이블</option>
+              <option>맨몸/덤벨</option>
+              <option>바벨/덤벨/머신</option>
+              <option>집(밴드/덤벨)</option>
+            </select>
+          </div>
+          <div class="field"><label>세션 시간(분)</label>
+            <input id="minutes" type="number" min="30" max="120" value="60"/>
+          </div>
+        </div>
+        <div class="grid" style="margin-top:10px">
+          <div class="field" style="grid-column:span 3"><label>부상/통증(없으면 비움)</label>
+            <input id="injury" type="text" placeholder="예) 어깨 불편, 스쿼트 시 무릎 시림"/>
+          </div>
+          <div class="field" style="grid-column:span 3"><label>러닝 병행(없으면 비움)</label>
+            <input id="run" type="text" placeholder="예) 주 2회 30분 조깅"/>
+          </div>
+        </div>
+        <div class="row">
+          <button class="primary" id="gen">추천 받기</button>
+          <button id="today">오늘 루틴만</button>
+          <span class="hint">※ 자유 질문은 아래 입력창을 이용하세요.</span>
+        </div>
+      </div>
+
+      <!-- 대화 영역 -->
+      <div id="chat"></div>
+
+      <!-- 자유 질문 -->
+      <div class="free">
+        <input id="userInput" type="text" placeholder="예) 어깨 안 아프게 벤치 대체운동 추천"/>
+        <button id="sendBtn" class="primary">보내기</button>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
